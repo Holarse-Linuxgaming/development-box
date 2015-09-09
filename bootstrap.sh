@@ -31,10 +31,11 @@ mkdir -p /var/www/holarse
 sudo chown vagrant:vagrant /var/www/holarse
 wget -q https://github.com/Holarse-Linuxgaming/website/archive/master.zip -P /tmp
 unzip /tmp/master.zip -d /var/www/holarse
+sudo chown vagrant:vagrant /var/www/holarse/website-master -R
 
 # installieren
 cd /var/www/holarse/website-master
 jruby -S bundle install
 jruby -S rake db:setup
 
-jruby -S rails s -b 0.0.0.0
+nohup jruby -S rails s -b 0.0.0.0 &
