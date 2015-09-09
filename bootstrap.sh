@@ -15,7 +15,7 @@ sudo apt-get install -y --allow-unauthenticated mariadb-server mariadb-client
 
 # jruby installieren
 JRUBY_VERSION=9.0.1.0
-wget https://s3.amazonaws.com/jruby.org/downloads/$JRUBY_VERSION/jruby-bin-$JRUBY_VERSION.tar.gz -P /tmp/
+wget -q https://s3.amazonaws.com/jruby.org/downloads/$JRUBY_VERSION/jruby-bin-$JRUBY_VERSION.tar.gz -P /tmp/
 sudo tar -xf /tmp/jruby-bin-$JRUBY_VERSION.tar.gz -C /opt/
 
 sudo cp /vagrant/bootstrap/jruby.sh /etc/profile.d/
