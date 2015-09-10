@@ -36,6 +36,11 @@ chown vagrant:vagrant /var/www/holarse
 wget -q https://github.com/Holarse-Linuxgaming/website/archive/master.zip -P /tmp
 unzip /tmp/master.zip -d /var/www/holarse
 
+# datenbank anlegen
+mysql -u root -p$MYSQL_PASS -e "create database holarse_development"
+mysql -u root -p$MYSQL_PASS -e "create database holarse_test"
+mysql -u root -p$MYSQL_PASS -e "create database holarse_production"
+
 # installieren
 cd /var/www/holarse/website-master
 chown vagrant:vagrant /var/www/holarse/website-master -R
