@@ -1,0 +1,16 @@
+[Unit]
+Description=Holarse Web Server
+
+[Service]
+ExecStart=/opt/jruby-9.0.1.0/bin/jruby -S rails s -b 0.0.0.0
+
+WorkingDirectory=/var/www/holarse/website-master
+
+User=vagrant
+Group=vagrant
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
