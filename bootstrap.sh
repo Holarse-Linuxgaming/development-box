@@ -20,14 +20,15 @@ apt-get install -y nginx
 JRUBY_VERSION=9.0.1.0
 wget -q https://s3.amazonaws.com/jruby.org/downloads/$JRUBY_VERSION/jruby-bin-$JRUBY_VERSION.tar.gz -P /tmp/
 tar -xf /tmp/jruby-bin-$JRUBY_VERSION.tar.gz -C /opt/
+ln -s /opt/jruby-$JRUBY_VERSION /opt/jruby
 
-cp /vagrant/bootstrap/jruby.sh /etc/profile.d/
-source /etc/profile.d/jruby.sh # achtung, jruby-version hier auch anpassen
+cp /vagrant/bootstrap/profiles/jruby.sh /etc/profile.d/
+source /etc/profile.d/jruby.sh
 
 chown vagrant:vagrant /opt/jruby-$JRUBY_VERSION/ -R
 
 # pakete installieren
-jruby -S gem install bundler
+jruby -S gem install bundler -N -q
 
 # webseite holen
 mkdir -p /var/www/holarse
@@ -38,12 +39,15 @@ unzip /tmp/master.zip -d /var/www/holarse
 # installieren
 cd /var/www/holarse/website-master
 chown vagrant:vagrant /var/www/holarse/website-master -R
-su vagrant -c '/opt/jruby-9.0.1.0/bin/jruby -S bundle install'
-su vagrant -c '/opt/jruby-9.0.1.0/bin/jruby -S rake db:setup'
+su vagrant -c '/opt/jruby/bin/jruby -S bundle install'
+su vagrant -c '/opt/jruby/bin/jruby -S rake db:setup'
 
 # systemd
-cp /vagrant/holarse-www.service /lib/systemd/system/holarse-www.service
+cp /vagrant/bootstrap/systemd/holarse-www.service /lib/systemd/system/holarse-www.service
 systemctl daemon-reload
 systemctl enable holarse-www
 systemctl start holarse-www
 
+sleep 30
+
+echo "Das System ist nun bereit."
