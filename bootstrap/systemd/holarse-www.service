@@ -11,7 +11,7 @@ Group=vagrant
 
 Restart=always
 
-Wants=mysql.service
+Wants=mysql.service,memcached.service,nginx.service
 
 [Install]
 WantedBy=multi-user.target

@@ -16,6 +16,9 @@ apt-get install -y --allow-unauthenticated mariadb-server mariadb-client
 # nginx
 apt-get install -y nginx
 
+# memcached
+apt-get install -y memcached
+
 # jruby installieren
 JRUBY_VERSION=9.0.1.0
 wget -q https://s3.amazonaws.com/jruby.org/downloads/$JRUBY_VERSION/jruby-bin-$JRUBY_VERSION.tar.gz -P /tmp/
